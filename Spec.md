@@ -10,6 +10,11 @@ that can't be read or altered without the key.
 To facilitate convenient interoperability, this spec defines the
 external format of both tokens and keys.
 
+In the previous version of the fernet format, there existed a vulnerability
+in which the signing and encryption keys were derived from the same block. 
+This new version of fernet removes that vulnerability by generating the keys
+for each block separately. 
+
 All encryption in this version is done with AES 128 in CBC mode.
 
 All base 64 encoding is done with the "URL and Filename Safe"
