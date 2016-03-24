@@ -34,13 +34,12 @@ fields:
 A fernet *token* is the base64url encoding of the
 concatenation of the following fields:
 
-    0x81 ‖ IV ‖ Ciphertext ‖ Tag
+    Version ‖ IV ‖ Ciphertext ‖ Tag
 
 - *Version*, 8 bits
-- *Timestamp*, 64 bits
 - *IV*, 128 bits
 - *Ciphertext*, variable length, multiple of 128 bits
-- *HMAC*, 256 bits
+- *Tag*, 256 bits
 
 Fernet tokens are not self-delimiting. It is assumed that the
 transport will provide a means of finding the length of each
@@ -51,14 +50,9 @@ complete fernet token.
 ### Version
 
 This field denotes which version of the format is being used by
-the token. Currently there is only one version defined, with the
-value 128 (0x80).
+the token. The most recent version is denoted 0x81. The previous (and 
+first) version is denoted 0x80. 
 
-### Timestamp
-
-This field is a 64-bit unsigned big-endian integer. It records the
-number of seconds elapsed between January 1, 1970 UTC and the time
-the token was created.
 
 ### IV
 
