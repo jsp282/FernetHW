@@ -85,9 +85,8 @@ and that this input is *not* base64url encoded.
 Given a key and message, generate a fernet token with the
 following steps, in order:
 
-1. Record the current time for the timestamp field.
-2. Choose a unique IV.
-3. Construct the ciphertext:
+1. Choose a unique IV.
+2. Construct the ciphertext:
    1. Pad the message to a multiple of 16 bytes (128 bits) per [RFC
    5652, section 6.3](http://tools.ietf.org/html/rfc5652#section-6.3).
    This is the same padding technique used in [PKCS #7
@@ -97,10 +96,10 @@ following steps, in order:
    TLS 1.2).
    2. Encrypt the padded message using AES 128 in CBC mode with
    the chosen IV and user-supplied encryption-key.
-4. Compute the HMAC field as described above using the
+3. Compute the HMAC field as described above using the
 user-supplied signing-key.
-5. Concatenate all fields together in the format above.
-6. base64url encode the entire token.
+4. Concatenate all fields together in the format above.
+5. base64url encode the entire token.
 
 ## Verifying
 
