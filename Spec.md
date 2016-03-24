@@ -50,8 +50,8 @@ complete fernet token.
 ### Version
 
 This field denotes which version of the format is being used by
-the token. The most recent version is denoted 0x81. The previous (and 
-first) version is denoted 0x80. The Fernet checks which version 
+the token. The most recent version is denoted 0x81 and is backward compatible.
+The previous (and first) version is denoted 0x80. The Fernet checks which version 
 is being used to choose the appropriate decryption method.
 
 
@@ -109,7 +109,7 @@ recover the original message, perform the following steps, in
 order:
 
 1. base64url decode the token.
-2. Ensure the first byte of the token is 0x80.
+2. Check first byte of the token. If token is 0x80 (old version), continue to step 3, else if it is 0x81 (new version) go to step 4.
 3. If the user has specified a maximum age (or "time-to-live") for
 the token, ensure the recorded timestamp is not too far in the
 past.
@@ -119,4 +119,4 @@ signing-key.
 token, using a constant-time comparison function.
 6. Decrypt the ciphertext field using AES 128 in CBC mode with the
 recorded IV and user-supplied encryption-key.
-7. Unpad the decrypted plaintext, yielding the original message.
+8. Unpad the decrypted plaintext, yielding the original message.
