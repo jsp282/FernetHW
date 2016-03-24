@@ -109,7 +109,7 @@ recover the original message, perform the following steps, in
 order:
 
 1. base64url decode the token.
-2. Check first byte of the token. If token is 0x80 (old version), continue to step 3, else if it is 0x81 (new version) go to step 4.
+2. Check first byte of the token. If the token is 0x80 (old version), continue to step 3, else if it is 0x81 (new version) go to step 4.
 3. If the user has specified a maximum age (or "time-to-live") for
 the token, ensure the recorded timestamp is not too far in the
 past.
