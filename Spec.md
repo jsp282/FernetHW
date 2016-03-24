@@ -35,7 +35,7 @@ fields:
 A fernet *token* is the base64url encoding of the
 concatenation of the following fields:
 
-    Version ‖ Timestamp ‖ IV ‖ Ciphertext ‖ HMAC
+    0x81 ‖ IV ‖ Ciphertext ‖ Tag
 
 - *Version*, 8 bits
 - *Timestamp*, 64 bits
