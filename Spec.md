@@ -51,7 +51,8 @@ complete fernet token.
 
 This field denotes which version of the format is being used by
 the token. The most recent version is denoted 0x81. The previous (and 
-first) version is denoted 0x80. 
+first) version is denoted 0x80. The Fernet checks which version 
+is being used to choose the appropriate decryption method.
 
 
 ### IV
@@ -69,12 +70,12 @@ This field has variable size, but is always a multiple of 128
 bits, the AES block size. It contains the original input message,
 padded and encrypted.
 
-### HMAC
+### Tag
 
 This field is the 256-bit SHA256 HMAC, under signing-key, of the
 concatenation of the following fields:
 
-    Version ‖ Timestamp ‖ IV ‖ Ciphertext
+    Version ‖ IV ‖ Ciphertext ‖ Tag
 
 Note that the HMAC input is the entire rest of the token verbatim,
 and that this input is *not* base64url encoded.
