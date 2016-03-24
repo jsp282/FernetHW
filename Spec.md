@@ -31,9 +31,9 @@ fields:
     h = HMAC(key, hashes.SHA256(), backend=backend)
     h.update(b"\x01")
     self._encryption_key = h.finalize()[:16]
-    
- *Signing-key*, 128 bits
- *Encryption-key*, 128 bits
+
+- *Signing-key*, 128 bits
+- *Encryption-key*, 128 bits
 
 ## Token Format
 
@@ -42,10 +42,10 @@ concatenation of the following fields:
 
     Version ‖ IV ‖ Ciphertext ‖ Tag
 
- *Version*, 8 bits
- *IV*, 128 bits
- *Ciphertext*, variable length, multiple of 128 bits
- *HMAC*, 256 bits
+- *Version*, 8 bits
+- *IV*, 128 bits
+- *Ciphertext*, variable length, multiple of 128 bits
+- *HMAC*, 256 bits
 
 Fernet tokens are not self-delimiting. It is assumed that the
 transport will provide a means of finding the length of each
@@ -59,6 +59,7 @@ This field denotes which version of the format is being used by
 the token. The most recent version is denoted 0x81 and is backward compatible.
 The previous (and first) version is denoted 0x80. The Fernet checks which version 
 is being used to choose the appropriate decryption method.
+
 
 ### IV
 
